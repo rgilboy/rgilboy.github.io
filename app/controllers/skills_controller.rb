@@ -44,7 +44,7 @@ class SkillsController < ApplicationController
 
     if the_skill.valid?
       the_skill.save
-      redirect_to("/skills", { :notice => "Skill created successfully." })
+      redirect_to("/skills/#{the_skill.id}", { :notice => "Skill created successfully." })
     else
       redirect_to("/skills", { :alert => the_skill.errors.full_messages.to_sentence })
     end

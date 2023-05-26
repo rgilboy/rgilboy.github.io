@@ -27,15 +27,7 @@ Rails.application.routes.draw do
 
   # CREATE
   post("/insert_lesson", { :controller => "lessons", :action => "create" })
-          
-  # READ
-  get("/lessons", { :controller => "lessons", :action => "index" })
   
-  get("/lessons/:path_id", { :controller => "lessons", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_lesson/:path_id", { :controller => "lessons", :action => "update" })
   
   # DELETE
   get("/delete_lesson/:path_id", { :controller => "lessons", :action => "destroy" })
