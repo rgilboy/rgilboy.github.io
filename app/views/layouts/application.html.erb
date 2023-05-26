@@ -18,13 +18,10 @@
   <body>
      <ul>
     <li>
-      <a href="/skills">Skills<a>
+      <a href="/skills">All skills<a>
     </li>
      <li>
       <a href="/lessons">Lessons<a>
-    </li>
-    <li>
-      <a href="/likes">Likes<a>
     </li>
 
     <% if session.fetch(:user_id) == nil %>
@@ -37,12 +34,21 @@
 
     <% else %>
     <li>
-      <a href="/my_skills">My Skills<a>
+      <a href="/my_skills">My skills<a>
     </li>
+
+    <li>
+      <a href="/likes">My likes<a>
+    </li>
+
     <li>
       <a href="/user_sign_out">Sign out<a>
     </li>
     <% end %>
+
+<p style="color: green"> <%= notice %> </p>
+<p style="color: red"> <%= alert %> </p>
+
 
   </ul>
 

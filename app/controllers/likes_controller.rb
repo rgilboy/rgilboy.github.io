@@ -1,10 +1,19 @@
 class LikesController < ApplicationController
   def index
-    matching_likes = Like.all
+
+    if session.fetch(:user_id)
+    @current_user = User.where(:id => session.fetch(:user_id)).at(0)
+    matching_likes = Like.all.where(:fan => @current_user.id)
 
     @list_of_likes = matching_likes.order({ :created_at => :desc })
 
     render({ :template => "likes/index.html.erb" })
+
+    else
+      redirect_to("/", {:alert => "Please sign in to view your likes"})
+
+    end
+    
   end
 
   def show
