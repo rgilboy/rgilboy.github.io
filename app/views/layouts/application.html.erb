@@ -16,6 +16,36 @@
   </head>
 
   <body>
+     <ul>
+    <li>
+      <a href="/skills">Skills<a>
+    </li>
+     <li>
+      <a href="/lessons">Lessons<a>
+    </li>
+    <li>
+      <a href="/likes">Likes<a>
+    </li>
+
+    <% if session.fetch(:user_id) == nil %>
+    <li>
+      <a href="/user_sign_up">Sign up<a>
+    </li>
+     <li>
+      <a href="/user_sign_in">Sign in<a>
+    </li>
+
+    <% else %>
+    <li>
+      <a href="/my_skills">My Skills<a>
+    </li>
+    <li>
+      <a href="/user_sign_out">Sign out<a>
+    </li>
+    <% end %>
+
+  </ul>
+
     <%= yield %>
   </body>
 </html>

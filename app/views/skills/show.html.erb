@@ -1,0 +1,204 @@
+<div>
+  <div>
+    <h1>
+      <%= @the_skill.skill_name.capitalize %> by <%=@the_skill.user.username%> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/skills">
+          Go back
+        </a>
+      </div>
+
+
+      <% if session.fetch(:user_id) == @the_skill.user_id%>
+      <div>
+        <a href="/delete_skill/<%= @the_skill.id %>">
+          Delete skill
+        </a>
+      </div>
+      <% end %>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_skill.user.username %>
+      </dd>
+
+      <dt>
+        Skill name
+      </dt>
+      <dd>
+        <%= @the_skill.skill_name %>
+      </dd>
+
+      <dt>
+        Skill description
+      </dt>
+      <dd>
+        <%= @the_skill.skill_description %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_skill.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_skill.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <% if session.fetch(:user_id) == @the_skill.user_id%>
+    <h2>
+      Edit skill
+    </h2>
+
+    <form action="/modify_skill/<%= @the_skill.id %>"  method="post" >
+      <div>
+
+        <input type="hidden" id="user_id_box" name="query_user_id" value="<%= @the_skill.user_id %>">
+      </div>
+
+      <div>
+        <label for="skill_name_box">
+          Skill name
+        </label>
+
+        <input type="text" id="skill_name_box" name="query_skill_name" value="<%= @the_skill.skill_name %>">
+      </div>
+
+      <div>
+        <label for="skill_description_box">
+          Skill description
+        </label>
+
+        <input type="text" id="skill_description_box" name="query_skill_description" value="<%= @the_skill.skill_description %>">
+      </div>
+
+      <button>
+        Update skill
+      </button>
+    </form>
+    <%end%>
+  </div>
+</div>
+
+<% if session.fetch(:user_id) == @the_skill.user_id%>
+
+<div>
+  <div>
+    <h2>
+      Add a new lesson
+    </h2>
+
+    <form action="/insert_lesson" method="post">
+      <div>
+        <label for="content_box">
+          Content
+        </label>
+
+        <input type="text" id="content_box" name="query_content">
+      </div>
+
+      <div>
+
+        <input type="hidden" value = "<%=@the_skill.id%>" id="skill_id_box" name="query_skill_id">
+      </div>
+
+      <button>
+        Create lesson
+      </button>
+    </form>
+  </div>
+</div>
+
+<%end%>
+
+<%if session.fetch(:user_id)%>
+<% if session.fetch(:user_id) != @the_skill.user_id%>
+
+<div>
+  <a href = "/insert_like">
+  Like Skill
+  </a>
+</div>
+
+<%end%>
+<%end%>
+
+<div>
+  <div>
+    <table border="1">
+      <tr>
+
+        <th>
+          Content
+        </th>
+
+        <th>
+          Skill
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_lessons.each do |a_lesson| %>
+      <tr>
+
+        <td>
+          <%= a_lesson.content %>
+        </td>
+
+        <td>
+          <%= a_lesson.skill.skill_name %>
+        </td>
+
+        <td>
+          <%= a_lesson.created_at %>
+        </td>
+        <td>
+          <%= time_ago_in_words(a_lesson.updated_at) %> ago
+        </td>
+
+        <td>
+        <% if session.fetch(:user_id) == @the_skill.user_id%>
+          <a href="/delete_lesson/<%= a_lesson.id %>">
+            Delete Lesson
+          </a>
+
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+<hr>

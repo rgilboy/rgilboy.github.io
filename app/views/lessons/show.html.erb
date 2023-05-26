@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Lesson #<%= @the_lesson.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/lessons">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_lesson/<%= @the_lesson.id %>">
+          Delete lesson
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Content
+      </dt>
+      <dd>
+        <%= @the_lesson.content %>
+      </dd>
+
+      <dt>
+        Skill
+      </dt>
+      <dd>
+        <%= @the_lesson.skill_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_lesson.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_lesson.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit lesson
+    </h2>
+
+    <form action="/modify_lesson/<%= @the_lesson.id %>"  method="post" >
+      <div>
+        <label for="content_box">
+          Content
+        </label>
+
+        <input type="text" id="content_box" name="query_content" value="<%= @the_lesson.content %>">
+      </div>
+
+      <div>
+        <label for="skill_id_box">
+          Skill
+        </label>
+
+        <input type="text" id="skill_id_box" name="query_skill_id" value="<%= @the_lesson.skill_id %>">
+      </div>
+
+      <button>
+        Update lesson
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
